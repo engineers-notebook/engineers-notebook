@@ -11,10 +11,10 @@ personalController.getPersonal = (req, res, next) => {
 };
 
 personalController.postPersonal = (req, res, next) => {
-  const { id, title, description } = req.body;
+  const {title, description } = req.body;
   const vals = [id, title, description];
   const sqlQuery =
-    'INSERT INTO Webpack (id, title, description) VALUES ($1, $2, $3)';
+    'INSERT INTO Webpack (title, description) VALUES ($1, $2)';
   db.query(sqlQuery, vals).then((data) => {
     res.locals.newPersonal = data;
     next();

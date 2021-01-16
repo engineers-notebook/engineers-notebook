@@ -11,10 +11,10 @@ appConfigController.getAppConfig = (req, res, next) => {
 };
 
 appConfigController.postAppConfig = (req, res, next) => {
-  const { id, title, description } = req.body;
-  const vals = [id, title, description];
+  const { title, description } = req.body;
+  const vals = [title, description];
   const sqlQuery =
-    'INSERT INTO Appconfig (id, title, description) VALUES ($1, $2, $3)';
+    'INSERT INTO Appconfig (id, title, description) VALUES ($1, $2)';
   db.query(sqlQuery, vals).then((data) => {
     res.locals.newAppConfig = data;
     next();

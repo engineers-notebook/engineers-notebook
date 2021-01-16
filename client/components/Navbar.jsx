@@ -6,6 +6,8 @@ import Backend from './Backend.jsx';
 import WebpackSteps from './WebpackSteps.jsx';
 import FrontendSteps from './FrontendSteps.jsx';
 import BackendSteps from './BackendSteps.jsx';
+import AppConfig from './AppConfig.jsx'
+import AppConfigSteps from './AppConfigSteps.jsx'
 
 // import hook
 import useToggle from '../hooks/useToggle';
@@ -14,28 +16,42 @@ function Navbar() {
   const [webpackState, toggleWebpackState] = useState(false);
   const [frontendState, toggleFrontendState] = useState(false);
   const [backendState, toggleBackendState] = useState(false);
+  const [appConfigState, toggleAppConfigState] = useState(false);
 
   const webpackChecker = () => {
     webpackState ? toggleWebpackState(false) : toggleWebpackState(true);
     toggleBackendState(false);
     toggleFrontendState(false);
+    toggleAppConfigState(false)
   }
 
   const frontEndChecker = () => {
     frontendState ? toggleFrontendState(false) : toggleFrontendState(true);
     toggleWebpackState(false);
     toggleBackendState(false);
+    toggleAppConfigState(false)
   }
 
   const backendChecker = () => {
     backendState ? toggleBackendState(false) : toggleBackendState(true);
     toggleFrontendState(false);
     toggleWebpackState(false);
-
+    toggleAppConfigState(false)
+  }
+  const AppConfigChecker = () => {
+    appConfigState ? toggleAppConfigState(false) : toggleAppConfigState(true);
+    toggleFrontendState(false);
+    toggleWebpackState(false);
+    toggleBackendState(false);
+  }
   return (
     <div>
       <div className="container">
-        {/* <div if webpack is clicked, then change the state of webpack to true and then display component> */}
+        <div>
+          <h1 onClick={AppConfigChecker}>
+            <AppConfig />
+          </h1>
+        </div>
         <div>
           <h1 onClick={webpackChecker}>
             <Webpack />
@@ -53,12 +69,14 @@ function Navbar() {
         </div>
       </div>
       <div className="grid-container">
-        {/* {if state is true => display / wrap in css grid } */}
         {webpackState ? <WebpackSteps /> : null}
         {frontendState ? <FrontendSteps /> : null}
         {backendState ? <BackendSteps /> : null}
+        {appConfigState ? <AppConfigSteps /> : null}
       </div>
     </div>
-  );
+  )
 }
+
+
 export default Navbar;

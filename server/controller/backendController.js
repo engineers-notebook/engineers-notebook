@@ -11,10 +11,10 @@ backendController.getBackEnd = (req, res, next) => {
 };
 
 backendController.postBackend = (req, res, next) => {
-  const { id, title, description, resources, iscompleted } = req.body;
-  const vals = [id, title, description, resources, iscompleted];
+  const { title, description, resources, iscompleted } = req.body;
+  const vals = [title, description, resources, iscompleted];
   const sqlQuery =
-    'INSERT INTO Backend (id, title, description, resources, iscompleted) VALUES ($1, $2, $3, $4, $5)';
+    'INSERT INTO Backend (title, description, resources, iscompleted) VALUES ($1, $2, $3, $4)';
   db.query(sqlQuery, vals).then((data) => {
     res.locals.newBackend = data;
     next();

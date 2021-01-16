@@ -3,15 +3,15 @@ import React, { useState, useEffect } from 'react';
 // import useToggle from '../hooks/useToggle';
 // import WebpackChild1 from './WebpackChild1.jsx';
 
-function Webpack() {
+function AppConfig() {
   //   const [theState, toggleIsTheState] = useToggle();
 
   return (
     <main>
-      <div className="webpack">
-        <h1 className="navbarTitle">Webpack</h1>
+      <div className="appConfig">
+        <h1 className="navbarTitle">AppConfig</h1>
       </div>
     </main>
   );
 }
-export default Webpack;
+export default AppConfig;
