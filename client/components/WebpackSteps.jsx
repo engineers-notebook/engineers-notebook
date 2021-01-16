@@ -29,6 +29,7 @@ function WebpackSteps() {
 
   return (
     <Fragment>
+      <h3>Webpack Steps</h3>
       {createdDivs}
     </Fragment>
   );
