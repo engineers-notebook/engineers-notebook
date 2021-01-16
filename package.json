@@ -6,7 +6,8 @@
     "build": "NODE_ENV=production webpack",
     "prod": "NODE_ENV=production nodemon server/server.js",
     "dev": "NODE_ENV=development webpack serve --open --hot & nodemon server/server.js",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "jake": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"nodemon server/server.js\""
   },
   "keywords": [],
   "author": "",
@@ -31,6 +32,8 @@
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "eslint-config-airbnb": "^18.2.1",
     "file-loader": "^6.2.0",
