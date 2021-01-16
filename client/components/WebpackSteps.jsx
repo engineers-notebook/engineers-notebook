@@ -2,44 +2,34 @@ import React, { useState, useEffect, Fragment } from 'react';
 
 function WebpackSteps() {
   const createdDivs = [];
-
-  const valueArray = ['1', '2', '3']
-
   const [webpackData, setWebpackData] = useState([]);
+
   useEffect(() => {
     fetch("/api/webpack")
       .then((res) => res.json())
       .then((result) => {
           console.log('result: ', result)
-            setWebpackData(result);
+          setWebpackData(result);
         },
           (error) => {
             console.log(error);
-        }
-        )
+        })
   }, [])
-      console.log('webpackdata ', webpackData);
+
+  for (let i = 0; i < webpackData.length; i+=1) {
+    createdDivs.push(
+      <div key={`key${i}`} id={webpackData[i].id}>
+      <h1>{webpackData[i].title}</h1>
+      <p>{webpackData[i].description}</p>
+      <a href={webpackData[i].resources}>Documentation</a>
+      <input type="checkbox" name={webpackData[i].iscompleted ? "true" : "false"}></input>
+      </div>
+    )
+  }
 
   return (
     <Fragment>
-      <div>
-        <h4>AAAAA</h4>
-      </div>
-      <div>
-        <h4>Step2</h4>
-      </div>
-      <div>
-        <h4>Step3</h4>
-      </div>
-      <div>
-        <h4>Step4</h4>
-      </div>
-      <div>
-        <h4>Step5</h4>
-      </div>
-      <div>
-        <h4>Step6</h4>
-      </div>
+      {createdDivs}
     </Fragment>
   );
 }
