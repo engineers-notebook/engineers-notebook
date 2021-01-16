@@ -1,10 +1,29 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 function WebpackSteps() {
+  const createdDivs = [];
+
+  const valueArray = ['1', '2', '3']
+
+  const [webpackData, setWebpackData] = useState([]);
+  useEffect(() => {
+    fetch("/api/webpack")
+      .then((res) => res.json())
+      .then((result) => {
+          console.log('result: ', result)
+            setWebpackData(result);
+        },
+          (error) => {
+            console.log(error);
+        }
+        )
+  }, [])
+      console.log('webpackdata ', webpackData);
+
   return (
     <Fragment>
       <div>
-        <h4>Step1</h4>
+        <h4>AAAAA</h4>
       </div>
       <div>
         <h4>Step2</h4>

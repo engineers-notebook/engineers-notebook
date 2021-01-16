@@ -17,7 +17,7 @@ function Navbar() {
         {/* <div if webpack is clicked, then change the state of webpack to true and then display component> */}
         <div>
           <h1 onClick={toggleIsTheState}>
-            <Webpack />
+            <Webpack theState={theState}/>
           </h1>
         </div>
         <div>
