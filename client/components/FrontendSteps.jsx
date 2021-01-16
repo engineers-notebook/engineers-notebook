@@ -1,28 +1,28 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
-function WebpackSteps() {
+function FrontendSteps() {
   const createdDivs = [];
-  const [webpackData, setWebpackData] = useState([]);
+  const [frontendData, setfrontendData] = useState([]);
 
   useEffect(() => {
-    fetch("/api/webpack")
+    fetch("/api/frontend")
       .then((res) => res.json())
       .then((result) => {
           console.log('result: ', result)
-          setWebpackData(result);
+          setfrontendData(result);
         },
           (error) => {
             console.log(error);
         })
   }, [])
 
-  for (let i = 0; i < webpackData.length; i+=1) {
+  for (let i = 0; i < frontendData.length; i+=1) {
     createdDivs.push(
-      <div className="cards" key={`key${i}`} id={webpackData[i].id}>
-      <h1>{webpackData[i].title}</h1>
-      <p>{webpackData[i].description}</p>
-      <a href={webpackData[i].resources}>Documentation</a>
-      <input type="checkbox" name={webpackData[i].iscompleted ? "true" : "false"}></input>
+      <div className="cards" key={`key${i}`} id={frontendData[i].id}>
+      <h1>{frontendData[i].title}</h1>
+      <p>{frontendData[i].description}</p>
+      <a href={frontendData[i].resources}>Documentation</a>
+      <input type="checkbox" name={frontendData[i].iscompleted ? "true" : "false"}></input>
       </div>
     )
   }
@@ -30,7 +30,7 @@ function WebpackSteps() {
     const title = document.querySelector('#title').value
     const description = document.querySelector('#description').value
     const resources = document.querySelector('#resources').value
-    fetch('/api/webpack', {
+    fetch('/api/frontend', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, description, resources, iscompleted: false })
@@ -41,7 +41,7 @@ function WebpackSteps() {
   }
   return (
     <Fragment>
-      <h3>Webpack Steps</h3>
+      <h3>Frontend Steps</h3>
       {createdDivs}
       <div className="cards">
         <input id="title" placeholder="Title"></input>
@@ -52,4 +52,5 @@ function WebpackSteps() {
     </Fragment>
   );
 }
-export default WebpackSteps;
+export default FrontendSteps;
+

@@ -4,7 +4,7 @@ import "../styles/Frontend.css"
 function Frontend () {
     return(
         <div className='frontend'>
-            <h1>Frontend</h1>
+            <h1 className="navbarTitle">Frontend</h1>
         </div>
 
     )

@@ -1,0 +1,32 @@
+* {
+  font-family: monospace;
+  outline: 0;
+}
+
+#divTitle {
+  text-align: right;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    '. . .'
+    '. . .'
+    '. . .'
+    '. . .';
+}
+
+body {
+  background: url(https://res.cloudinary.com/mrtommyliang/image/upload/v1608225974/white-waves_hsajfx.png);
+}
+
+
+.cards {
+  background: white;
+  margin: 1%;
+  padding: 3%;
+  box-shadow: 2px 4px 25px rgba(0,0,0,.2);
+}

@@ -11,10 +11,10 @@ webpackController.getWepack = (req, res, next) => {
 };
 
 webpackController.postWebpack = (req, res, next) => {
-  const { id, title, description, resources, iscompleted } = req.body;
-  const vals = [id, title, description, resources, iscompleted];
+  const {title, description, resources, iscompleted } = req.body;
+  const vals = [title, description, resources, iscompleted];
   const sqlQuery =
-    'INSERT INTO Webpack (id, title, description, resources, iscompleted) VALUES ($1, $2, $3, $4, $5)';
+    'INSERT INTO Webpack (title, description, resources, iscompleted) VALUES ($1, $2, $3, $4)';
   db.query(sqlQuery, vals).then((data) => {
     res.locals.newWebpack = data;
     next();

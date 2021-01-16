@@ -1,28 +1,28 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
-function WebpackSteps() {
+function BackendSteps() {
   const createdDivs = [];
-  const [webpackData, setWebpackData] = useState([]);
+  const [backendData, setBackendData] = useState([]);
 
   useEffect(() => {
-    fetch("/api/webpack")
+    fetch("/api/backend")
       .then((res) => res.json())
       .then((result) => {
           console.log('result: ', result)
-          setWebpackData(result);
+          setBackendData(result);
         },
           (error) => {
             console.log(error);
         })
   }, [])
 
-  for (let i = 0; i < webpackData.length; i+=1) {
+  for (let i = 0; i < backendData.length; i+=1) {
     createdDivs.push(
-      <div className="cards" key={`key${i}`} id={webpackData[i].id}>
-      <h1>{webpackData[i].title}</h1>
-      <p>{webpackData[i].description}</p>
-      <a href={webpackData[i].resources}>Documentation</a>
-      <input type="checkbox" name={webpackData[i].iscompleted ? "true" : "false"}></input>
+      <div className="cards" key={`key${i}`} id={backendData[i].id}>
+      <h1>{backendData[i].title}</h1>
+      <p>{backendData[i].description}</p>
+      <a href={backendData[i].resources}>Documentation</a>
+      <input type="checkbox" name={backendData[i].iscompleted ? "true" : "false"}></input>
       </div>
     )
   }
@@ -30,7 +30,7 @@ function WebpackSteps() {
     const title = document.querySelector('#title').value
     const description = document.querySelector('#description').value
     const resources = document.querySelector('#resources').value
-    fetch('/api/webpack', {
+    fetch('/api/backend', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, description, resources, iscompleted: false })
@@ -39,9 +39,10 @@ function WebpackSteps() {
     .catch(error => console.log('error: ', error))
     location.reload();
   }
+
   return (
     <Fragment>
-      <h3>Webpack Steps</h3>
+      <h3>Backend Steps</h3>
       {createdDivs}
       <div className="cards">
         <input id="title" placeholder="Title"></input>
@@ -52,4 +53,4 @@ function WebpackSteps() {
     </Fragment>
   );
 }
-export default WebpackSteps;
+export default BackendSteps;
