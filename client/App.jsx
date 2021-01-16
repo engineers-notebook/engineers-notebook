@@ -1,9 +1,11 @@
 import React from 'react';
+import Navbar from './components/Navbar.jsx';
+// import Webpack from './Webpack.jsx';
 
 function App() {
   return (
     <div>
-      <h1>Coming from react</h1>
+      <Navbar />
     </div>
   );
 }
