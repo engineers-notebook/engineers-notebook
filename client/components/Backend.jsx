@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import "../styles/Backend.css"
+import React, { useState } from 'react';
+import '../styles/Navbar.css';
 
-function Backend () {
-    return(
-        <div className='backend'>
-            <h1>Backend</h1>
-        </div>
-
-    )
+function Backend() {
+  return (
+    <div>
+      <h1 className="navbarTitle">Backend</h1>
+    </div>
+  );
 }
 export default Backend;
