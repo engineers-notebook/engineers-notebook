@@ -1,0 +1,13 @@
+#pointer {
+  height: 30px;
+  width: 30px;
+  animation: 0.8s linear 1s infinite alternate slidein;
+}
+@keyframes slidein {
+  from {
+    margin-left: 90%;
+  }
+  to {
+    margin-left: 92%;
+  }
+}

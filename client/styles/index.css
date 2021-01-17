@@ -3,15 +3,15 @@
   outline: 0;
 }
 
-#divTitle {
-  text-align: right;
-}
-
 .grid-container {
+  margin-top: 300px;
+  max-width: 80%;
+  margin: 4rem auto 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
+  justify-items: center;
   grid-template-areas:
     '. . .'
     '. . .'
@@ -20,13 +20,74 @@
 }
 
 body {
-  background: url(https://res.cloudinary.com/mrtommyliang/image/upload/v1608225974/white-waves_hsajfx.png);
+  /* background-position: center; */
+  background-image: url('https://i.ibb.co/dPj06rL/circuit-board-background-87946-250-weas3z.png');
+  /* background-attachment: fixed; */
 }
 
-
 .cards {
-  background: white;
-  margin: 1%;
-  padding: 3%;
-  box-shadow: 2px 4px 25px rgba(0,0,0,.2);
+  background: rgba(255, 255, 255, 0.7);
+  margin: 1rem;
+  padding: 4%;
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
+  width: 30rem;
+  height: 20rem;
+}
+
+.completedCheckboxParent {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  display: inline-block;
+}
+
+.innerContainer {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 25px;
+}
+
+.innerContainerH1 {
+  font-size: 22px;
+}
+
+.addYourOwn {
+  font-size: 20px;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.inputForm input {
+  display: inline-block;
+  border: none;
+  text-align: left;
+  box-shadow: 0px 2px #a9a9a9;
+  padding: 10px;
+  width: 300px;
+  margin: 10px auto;
+  background: transparent;
+  color: #000;
+}
+
+.inputForm button {
+  color: #000;
+  width: 250px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 20px auto;
+  padding: 8px 30px;
+  border: 2px solid hsla(0, 0%, 66.3%, 0.3);
+  transition: 0.3s ease;
+}
+
+.inputForm button:hover {
+  border: 2px solid #a9a9a9;
+  cursor: pointer;
 }
