@@ -7,7 +7,8 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   mode: process.env.NODE_ENV,
   module: {
@@ -17,8 +18,8 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-          }
-        ]
+          },
+        ],
       },
       {
         test: /.(js|jsx)$/,
@@ -26,34 +27,34 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
         },
       },
       {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
-      }
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'client/index.html'
-    })
+      template: 'client/index.html',
+    }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devServer: { 
+  devServer: {
+    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3000/',
         secure: false,
-        changeOrigin: true
-      }
+        changeOrigin: true,
+      },
     },
     publicPath: '/',
-  }
+  },
 };
-
