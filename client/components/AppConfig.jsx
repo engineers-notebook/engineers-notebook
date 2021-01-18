@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import useToggle from '../hooks/useToggle';
 // import WebpackChild1 from './WebpackChild1.jsx';
 
-function AppConfig() {
+const AppConfig = () => {
   //   const [theState, toggleIsTheState] = useToggle();
 
   return (

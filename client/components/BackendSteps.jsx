@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import '../styles/Backend.css';
 
-function BackendSteps() {
+const BackendSteps = () => {
   const createdDivs = [];
   const [backendData, setBackendData] = useState([]);
 

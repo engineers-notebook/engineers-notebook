@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Frontend.css';
 
-function Frontend() {
+const Frontend = () => {
   return (
     <div className="frontend">
       <h1 className="navbarTitle">Frontend</h1>

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/index.css';
 
-function LoginNavbar() {
+const LoginNavbar = () => {
   return (
     <div className="navbarContainer">
       <div className="navbar">

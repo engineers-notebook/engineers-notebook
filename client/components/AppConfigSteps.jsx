@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
-function AppConfigSteps() {
+const AppConfigSteps = () => {
   const createdDivs = [];
   const [appConfigData, setAppConfigData] = useState([]);
 

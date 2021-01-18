@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function LoginPage() {
+const LoginPage = () => {
   function handleSignup(event) {
     const name = document.querySelector('#name').value;
     const password = document.querySelector('#password').value;

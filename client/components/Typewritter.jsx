@@ -9,7 +9,7 @@ const Typewriter = () => {
       "The Engineer's Notebook",
     ];
 
-    function typeWriter(text, i, fnCallback) {
+    const typeWriter = (text, i, fnCallback) => {
       if (i < text.length) {
         document.querySelector('#divTitle').innerHTML =
           text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
@@ -23,7 +23,7 @@ const Typewriter = () => {
       }
     }
     // start a typewriter animation for a text in the dataText array
-    function StartTextAnimation(i) {
+    const StartTextAnimation = (i) => {
       if (dataText[i] === undefined) {
         setTimeout(function () {
           StartTextAnimation(0);
