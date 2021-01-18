@@ -9,13 +9,30 @@ function LoginPage() {
   }
 
   function handleSubmit(event) {
-    return event.preventDefault();
+    console.log('log in button clicked');
+    event.preventDefault();
+    const name = document.querySelector('#name').value;
+    const password = document.querySelector('#password').value;
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, password }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log('result: ', result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   return (
     <div className="outerContainer">
       <div className="loginContainer">
-        <input id="username" placeholder="username"></input>
+        <input id="name" placeholder="username"></input>
         <input id="password" placeholder="password"></input>
         <button onClick={handleSubmit}>Log in</button>
       </div>

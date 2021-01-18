@@ -8,6 +8,7 @@ const frontend = require('./routes/frontendRoutes.js');
 const backend = require('./routes/backendRoutes.js');
 const appconfig = require('./routes/appConfigRoutes.js');
 const personal = require('./routes/personalRoutes.js');
+const signup = require('./routes/signUpRoutes.js');
 
 // body parsing/url parsing
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use('/api', frontend);
 app.use('/api', backend);
 app.use('/api', appconfig);
 app.use('/api', personal);
+app.use('/api', signup);
 
 // --------- wrapped in if statement -------------
 // app.use('/', (req, res) => {
