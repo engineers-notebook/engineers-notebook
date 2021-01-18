@@ -20,7 +20,6 @@ signUpController.signUp = (req, res, next) => {
       "iscompleted" boolean
     )`
   const insertQuery = `INSERT INTO Login ("username", "password") VALUES ($1, $2)`
-
   
   db.query(createQuery)
   .then(data => {
@@ -29,5 +28,19 @@ signUpController.signUp = (req, res, next) => {
     })
   })
 };
+
+signUpController.login = (req, res, next) => {
+  res.cookie('username', req.body.name);
+  const values = [req.body.username, req.body.values]
+  const sqlQuery = `SELECT username, password FROM Login WHERE username = $1 AND password = $2`
+  db.query(sqlQuery, values).then((data) => {
+    console.log(data)
+    res.redirect('/dashboard');
+  })
+  .catch((err) => {
+    console.log(err);
+    res.redirect('/login')
+  })
+}
 
 module.exports = signUpController;
