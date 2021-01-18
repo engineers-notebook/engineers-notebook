@@ -3,6 +3,8 @@ DROP TABLE FrontEnd;
 DROP TABLE Webpack;
 DROP TABLE Personal;
 DROP TABLE BackEnd;
+DROP TABLE Login;
+
 ----------Table Creations -----------------------
 ---------- Table for AppConfig -----------
 CREATE TABLE AppConfig (
@@ -43,6 +45,18 @@ CREATE TABLE BackEnd
   "resources" varchar,
   "iscompleted" boolean
 );
+---------- Table for Login -----------
+
+-- come back to this!!!! 
+
+CREATE TABLE Login
+(
+  "id" serial NOT NULL,
+  "username" varchar, 
+  "password" varchar
+);
+
+-- come back to this!!!! 
 
 
 ----------Table Inserts -----------------------

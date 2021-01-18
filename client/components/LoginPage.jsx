@@ -1,23 +1,56 @@
 import React, { useState } from 'react';
 
 function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  function validate() {
-    return username.length > 0 && password.length > 0;
+  function handleSignup(event) {
+    const name = document.querySelector('#name').value;
+    const password = document.querySelector('#password').value;
+    console.log('log in button clicked');
+    event.preventDefault();
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, password }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log('result: ', result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
-  function handleSubmit(event) {
-    return event.preventDefault();
-  }
+  const handleLogin = (event) => {
+    const name = document.querySelector('#name').value;
+    const password = document.querySelector('#password').value;
+
+    console.log('sign up button clicked');
+    event.preventDefault();
+    fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, password }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log('result: ', result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
 
   return (
     <div className="outerContainer">
       <div className="loginContainer">
-        <input id="username" placeholder="username"></input>
+        <input id="name" placeholder="username"></input>
         <input id="password" placeholder="password"></input>
-        <button onClick={handleSubmit}>Log in</button>
+        <button onClick={handleSignup}>Sign up</button>
+        <button onClick={handleLogin}>Log in</button>
       </div>
     </div>
   );

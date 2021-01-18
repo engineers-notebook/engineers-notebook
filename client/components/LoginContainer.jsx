@@ -5,7 +5,7 @@ import LoginPage from './LoginPage.jsx';
 const LoginContainer = () => {
   return (
     <div>
-      <LoginNavbar />
+      {/* <LoginNavbar /> */}
       <LoginPage />
     </div>
   );
