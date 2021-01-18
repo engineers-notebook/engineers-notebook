@@ -37,6 +37,9 @@ const LoginPage = () => {
       .then(
         (result) => {
           console.log('result: ', result);
+          if (result !== undefined) {
+            window.location.replace('http://localhost:8080/dashboard');
+          }
         },
         (error) => {
           console.log(error);
