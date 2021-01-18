@@ -25,6 +25,14 @@ body {
   /* background-attachment: fixed; */
 }
 
+.welcome {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 2%;
+}
+
 .cards {
   background: rgba(255, 255, 255, 0.7);
   margin: 1rem;

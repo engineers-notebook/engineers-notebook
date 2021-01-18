@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Navbar.css';
 import Webpack from './Webpack.jsx';
 import Frontend from './Frontend.jsx';
@@ -12,11 +12,19 @@ import AppConfigSteps from './AppConfigSteps.jsx'
 // import hook
 import useToggle from '../hooks/useToggle';
 
-function Navbar() {
+const Navbar = () => {
   const [webpackState, toggleWebpackState] = useState(false);
   const [frontendState, toggleFrontendState] = useState(false);
   const [backendState, toggleBackendState] = useState(false);
   const [appConfigState, toggleAppConfigState] = useState(false);
+  const [cookieState, setCookieState] = useState('');
+
+  useEffect(() => {
+    fetch('/api/getCookie')
+      .then(res => res.json())
+      .then(data => setCookieState(data.username));
+
+  }, []);
 
   const webpackChecker = () => {
     webpackState ? toggleWebpackState(false) : toggleWebpackState(true);
@@ -46,6 +54,7 @@ function Navbar() {
   }
   return (
     <div>
+      <div className="welcome">Welcome {cookieState}</div>
       <div className="container">
         <div>
           <h1 onClick={AppConfigChecker}>

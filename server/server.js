@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 const PORT = 3000;
 
 const webpack = require('./routes/webpackRoutes.js');
@@ -9,14 +10,17 @@ const backend = require('./routes/backendRoutes.js');
 const appconfig = require('./routes/appConfigRoutes.js');
 const personal = require('./routes/personalRoutes.js');
 const signup = require('./routes/signUpRoutes.js');
+const dashboard = require('./routes/dashboardRoutes.js');
 
 // body parsing/url parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // serve build folder/statically serving client folder
 app.use('/build', express.static(path.resolve(__dirname, '../build')));
 app.use(express.static(path.resolve(__dirname, '../client')));
+
 
 // routes
 app.use('/api', webpack);
@@ -25,6 +29,7 @@ app.use('/api', backend);
 app.use('/api', appconfig);
 app.use('/api', personal);
 app.use('/api', signup);
+app.use('/api', dashboard);
 
 // --------- wrapped in if statement -------------
 // app.use('/', (req, res) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
-function FrontendSteps() {
+const FrontendSteps = () => {
   const createdDivs = [];
   const [frontendData, setfrontendData] = useState([]);
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import '../styles/Webpack.css';
 
-function WebpackSteps() {
+const WebpackSteps = () => {
   const createdDivs = [];
   const [webpackData, setWebpackData] = useState([]);
 
