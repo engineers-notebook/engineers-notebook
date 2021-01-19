@@ -10,11 +10,19 @@ frontendController.getFrontEnd = (req, res, next) => {
   });
 };
 
+frontendController.getUser = (req, res, next) => {
+  const user = req.params.username;
+  const userQuery = `SELECT * FROM ${user} WHERE type='Frontend'`;
+  db.query(userQuery).then((user) => {
+    res.locals.user = user.rows;
+    next();
+  });
+};
+
 frontendController.postFrontend = (req, res, next) => {
-  const { title, description, resources, iscompleted } = req.body;
-  const vals = [title, description, resources, iscompleted];
-  const sqlQuery =
-    'INSERT INTO Frontend (title, description, resources, iscompleted) VALUES ($1, $2, $3, $4)';
+  const { title, description, resources, iscompleted, type, name } = req.body;
+  const vals = [title, description, resources, iscompleted, type, name];
+  const sqlQuery = `INSERT INTO ${name} (title, description, resources, iscompleted, type, name) VALUES ($1, $2, $3, $4, $5, $6)`;
   db.query(sqlQuery, vals).then((data) => {
     res.locals.newFrontend = data;
     next();

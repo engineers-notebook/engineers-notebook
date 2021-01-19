@@ -78,9 +78,9 @@ const Navbar = () => {
         </div>
       </div>
       <div className="grid-container">
-        {webpackState ? <WebpackSteps /> : null}
-        {frontendState ? <FrontendSteps /> : null}
-        {backendState ? <BackendSteps /> : null}
+        {webpackState ? <WebpackSteps cookieState={cookieState}/> : null}
+        {frontendState ? <FrontendSteps cookieState={cookieState}/> : null}
+        {backendState ? <BackendSteps cookieState={cookieState}/> : null}
         {appConfigState ? <AppConfigSteps /> : null}
       </div>
     </div>

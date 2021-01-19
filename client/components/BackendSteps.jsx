@@ -1,17 +1,19 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import '../styles/Backend.css';
 
-const BackendSteps = () => {
+const BackendSteps = (props) => {
   const createdDivs = [];
   const [backendData, setBackendData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    fetch('/api/backend')
+    fetch(`/api/backend/${props.cookieState}`)
       .then((res) => res.json())
       .then(
         (result) => {
           console.log('result: ', result);
-          setBackendData(result);
+          setBackendData(result[0]);
+          setUserData(result[1]);
         },
         (error) => {
           console.log(error);
@@ -44,6 +46,36 @@ const BackendSteps = () => {
       </div>
     );
   }
+
+  for (let i = 0; i < userData.length; i += 1) {
+    createdDivs.push(
+      <div className="cards" key={`key${i}`} id={userData[i].id}>
+        <div className="innerContainer">
+          <div className="completedCheckboxParent">
+            <label>Complete</label>
+            <input
+              className="checkbox"
+              type="checkbox"
+              name={userData[i].iscompleted ? 'true' : 'false'}
+            ></input>
+          </div>
+          <h1 className="innerContainerH1">{userData[i].title}</h1>
+          <p>{userData[i].description}</p>
+          <a href={userData[i].resources} target="_blank">
+            Documentation
+          </a>
+          <img
+            id="pointer"
+            src="https://cdn.iconscout.com/icon/free/png-256/right-arrow-1438234-1216195.png"
+          />
+        </div>
+      </div>
+    );
+  }
+
+
+
+
   const handleSubmit = () => {
     const title = document.querySelector('#title').value;
     const description = document.querySelector('#description').value;
@@ -56,6 +88,8 @@ const BackendSteps = () => {
         description,
         resources,
         iscompleted: false,
+        type: 'Backend',
+        name: props.cookieState
       }),
     })
       .then((res) => console.log('res: ', res))

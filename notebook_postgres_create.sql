@@ -5,15 +5,17 @@ DROP TABLE Personal;
 DROP TABLE BackEnd;
 DROP TABLE Login;
 
-----------Table Creations -----------------------
----------- Table for AppConfig -----------
-CREATE TABLE AppConfig (
+-- ----------Table Creations -----------------------
+-- ---------- Table for AppConfig -----------
+CREATE TABLE AppConfig
+(
   "id" serial NOT NULL,
   "title" varchar,
   "description" varchar
 );
 ---------- Table for Peronsal -----------
-CREATE TABLE Personal (
+CREATE TABLE Personal
+(
   "id" serial NOT NULL,
   "title" varchar,
   "description" varchar
@@ -47,34 +49,31 @@ CREATE TABLE BackEnd
 );
 ---------- Table for Login -----------
 
--- come back to this!!!! 
-
 CREATE TABLE Login
 (
   "id" serial NOT NULL,
-  "username" varchar, 
+  "username" varchar,
   "password" varchar
 );
 
--- come back to this!!!! 
 
 
-----------Table Inserts -----------------------
+-- ----------Table Inserts -----------------------
 
-----------AppConfig-----------------------
+-- ----------AppConfig-----------------------
 
 INSERT INTO AppConfig
-  (id, title, description) 
-VALUES 
-  (1, 'Step 1', 'In your root project directory (inside of your terminal) run command “npm init -y”. This creates your package.json file where you will need to install all of your dependencies and identify your scripts.');
+  (id, title, description)
+VALUES
+  (1, 'Step 1', 'In your root project directory (inside of your terminal) run command $ npm init -y. This creates your package.json file where you will need to install all of your dependencies and identify your scripts.');
 ---- 
 INSERT INTO AppConfig
-  (id, title, description) 
-VALUES 
+  (id, title, description)
+VALUES
   (2, 'Step 2', 'Install your package dependencies. Run this command:
 npm i @babel/core @babel/preset-env @babel/preset-react babel-loader babel-preset-react css-loader file-loader url-loader webpack webpack cli webpack-dev-server ');
 
-------------Webpack-----------------------
+-- ------------Webpack-----------------------
 INSERT INTO Webpack
   (id, title, description, resources, iscompleted)
 VALUES
@@ -82,12 +81,12 @@ VALUES
 INSERT INTO Webpack
   (id, title, description, resources, iscompleted)
 VALUES
-  (2, 'Import your modules', 'Require in necessary modules at the top of the webpack config file using common js “require” syntax. Starter modules to import are: webpack, path, HtmlWebpackPlugin.', 'https://webpack.js.org/configuration/', false);
+  (2, 'Import your modules', 'Require in necessary modules at the top of the webpack config file using CommonJS require syntax. Starter modules to import are: webpack, path, HtmlWebpackPlugin.', 'https://webpack.js.org/configuration/', false);
 INSERT INTO Webpack
   (id, title, description, resources, iscompleted)
 VALUES
-  (3, 'Create a module.exports object that will start with a key of entry, output, mode, module', 'Inside of here, you’re going to be setting up your entry points, output path, modules and mode.', 'https://webpack.js.org/configuration/', false);
-INSERT INTO Webpack    
+  (3, 'Create a module.exports object', 'Your module.exports object should start with a keys of entry, output, mode, and module. Inside of here, you’re going to be setting up your entry points, output path, modules and mode.', 'https://webpack.js.org/configuration/', false);
+INSERT INTO Webpack
   (id, title, description, resources, iscompleted)
 VALUES
   (4, 'If you’re working with a backend', 'It’s important to create a devServer object that will contain a proxy and a route that the proxy will route to', 'https://webpack.js.org/configuration/dev-server/', false);
@@ -97,7 +96,7 @@ VALUES
   (5, 'Examples of a properly setup Webpack', 'Included is a properly set up webpack that allows usage of frontend and backend', 'https://github.com/mrtommyliang/Coductivity-2.0/blob/main/webpack.config.js', false);
 
 
-------------FrontEnd-----------------------
+-- ------------FrontEnd-----------------------
 INSERT INTO FrontEnd
   (id, title, description, resources, iscompleted)
 VALUES
@@ -119,7 +118,7 @@ INSERT INTO FrontEnd
 VALUES
   (5, 'Optional: Making a request to your backend', 'There are many ways to go about this. Your webpack configuration should have already proxied a request to your backend. A request should be made to an endpoint defined in your backend.', 'https://reactjs.org/docs/faq-ajax.html', false);
 
----------BackEnd---------------------------------
+-- ---------BackEnd---------------------------------
 INSERT INTO BackEnd
   (id, title, description, resources, iscompleted)
 VALUES

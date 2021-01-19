@@ -1,7 +1,10 @@
 import React from 'react';
 import '../styles/index.css';
 
+
+
 const LoginNavbar = () => {
+  
   return (
     <div className="navbarContainer">
       <div className="navbar">

@@ -99,3 +99,71 @@ body {
   border: 2px solid #a9a9a9;
   cursor: pointer;
 }
+
+/* Login Styling */
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 4rem;
+  font-size: 20px;
+  text-decoration: none;
+  margin-top: 2rem;
+}
+
+a {
+  display: flex;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
+  color: blue;
+}
+
+.signup {
+  margin-right: 1rem;
+}
+
+.outerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 15rem;
+}
+
+.loginContainer {
+  background: rgba(255, 255, 255, 0.7);
+  margin: 1rem;
+  padding: 2rem;
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
+}
+
+.loginContainer input {
+  display: flex;
+  text-align: center;
+  border: none;
+  box-shadow: 0px 2px #a9a9a9;
+  padding: 10px;
+  width: 270px;
+  margin: 10px auto;
+  background: transparent;
+  color: #000;
+  margin-bottom: 2rem;
+}
+
+.loginContainer button {
+  color: #000;
+  width: 135px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 10px 10px;
+  padding: 8px 10px;
+  border: 2px solid hsla(0, 0%, 66.3%, 0.3);
+  transition: 0.3s ease;
+}
+
+.loginContainer button:hover {
+  cursor: pointer;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+}

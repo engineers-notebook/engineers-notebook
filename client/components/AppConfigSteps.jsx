@@ -5,7 +5,7 @@ const AppConfigSteps = () => {
   const [appConfigData, setAppConfigData] = useState([]);
 
   useEffect(() => {
-    fetch('/api/frontend')
+    fetch('/api/appconfig')
       .then((res) => res.json())
       .then(
         (result) => {
@@ -32,9 +32,6 @@ const AppConfigSteps = () => {
 
           <h1 className="innerContainerH1">{appConfigData[i].title}</h1>
           <p>{appConfigData[i].description}</p>
-          <a href={appConfigData[i].resources} target="_blank">
-            Documentation
-          </a>
           <img
             id="pointer"
             src="https://cdn.iconscout.com/icon/free/png-256/right-arrow-1438234-1216195.png"

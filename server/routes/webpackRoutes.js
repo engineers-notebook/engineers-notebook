@@ -3,8 +3,11 @@ const express = require('express');
 const webpackController = require('../controller/webpackController.js');
 const router = express.Router();
 
-router.get('/webpack', webpackController.getWepack, (req, res) =>
-  res.status(200).json(res.locals.webpack)
+router.get(
+  '/webpack/:username',
+  webpackController.getWepack,
+  webpackController.getUser,
+  (req, res) => res.status(200).json([res.locals.webpack, res.locals.user])
 );
 
 router.post('/webpack', webpackController.postWebpack, (req, res, next) => {
