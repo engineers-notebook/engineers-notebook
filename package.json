@@ -8,7 +8,7 @@
     "prod": "NODE_ENV=production nodemon server/server.js",
     "dev": "NODE_ENV=development webpack serve --open --hot & nodemon server/server.js",
     "start": "webpack serve --open",
-    "jake": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"nodemon server/server.js\""
+    "devWindows": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"nodemon server/server.js\""
   },
   "keywords": [],
   "author": "",

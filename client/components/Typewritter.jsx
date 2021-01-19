@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Typewriter.css';
+import '../styles/index.css';
 
 const Typewriter = () => {
   document.addEventListener('DOMContentLoaded', function (event) {

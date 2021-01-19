@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Navbar.css';
+import '../styles/index.css';
 import Webpack from './Webpack.jsx';
 import Frontend from './Frontend.jsx';
 import Backend from './Backend.jsx';
@@ -9,23 +9,22 @@ import BackendSteps from './BackendSteps.jsx';
 import AppConfig from './AppConfig.jsx'
 import AppConfigSteps from './AppConfigSteps.jsx'
 
-// import hook
-import useToggle from '../hooks/useToggle';
-
 const Navbar = () => {
+  /* create different state hooks */
   const [webpackState, toggleWebpackState] = useState(false);
   const [frontendState, toggleFrontendState] = useState(false);
   const [backendState, toggleBackendState] = useState(false);
   const [appConfigState, toggleAppConfigState] = useState(false);
   const [cookieState, setCookieState] = useState('');
 
+  /* on page load, we create a cookie with the users name that stays persistent and use it to check against backend */
   useEffect(() => {
     fetch('/api/getCookie')
       .then(res => res.json())
       .then(data => setCookieState(data.username));
-
   }, []);
 
+  /* check to see which navbar item is currently selected */
   const webpackChecker = () => {
     webpackState ? toggleWebpackState(false) : toggleWebpackState(true);
     toggleBackendState(false);
@@ -52,6 +51,10 @@ const Navbar = () => {
     toggleWebpackState(false);
     toggleBackendState(false);
   }
+  /*
+    * cookieState is the username which is eventually passed down
+    * stays persistent so the frontend can keep track of the current logged in user
+  */
   return (
     <div>
       <div className="welcome">Welcome {cookieState}</div>

@@ -1,15 +1,19 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
 const AppConfigSteps = () => {
+  /* variable and state declaration */
   const createdDivs = [];
   const [appConfigData, setAppConfigData] = useState([]);
 
+  /*
+    * similar to component life cycle method.
+    * onload, the page will make a fetch request, and set it as state under appConfigData
+  */
   useEffect(() => {
     fetch('/api/appconfig')
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log('result: ', result);
           setAppConfigData(result);
         },
         (error) => {
@@ -18,6 +22,7 @@ const AppConfigSteps = () => {
       );
   }, []);
 
+  /* iterating through the appConfigData to create the divs */
   for (let i = 0; i < appConfigData.length; i += 1) {
     createdDivs.push(
       <div className="cards" key={`key${i}`} id={appConfigData[i].id}>

@@ -1,10 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
 const FrontendSteps = (props) => {
+  /* variable and state declaration */
   const createdDivs = [];
   const [frontendData, setfrontendData] = useState([]);
   const [userData, setUserData] = useState([]);
 
+  /*
+    * similar to component life cycle method.
+    * onload, the page will make a fetch request, and set it as state under backendData
+  */
   useEffect(() => {
     fetch(`/api/frontend/${props.cookieState}`)
       .then((res) => res.json())
@@ -19,6 +24,7 @@ const FrontendSteps = (props) => {
       );
   }, []);
 
+  /* iterating thorough frontendData to create the divs  */
   for (let i = 0; i < frontendData.length; i += 1) {
     createdDivs.push(
       <div className="cards" key={`key${i}`} id={frontendData[i].id}>
@@ -44,6 +50,7 @@ const FrontendSteps = (props) => {
     );
   }
 
+  /* creating user data  */
   for (let i = 0; i < userData.length; i += 1) {
     createdDivs.push(
       <div className="cards" key={`key${i}`} id={userData[i].id}>
@@ -69,7 +76,9 @@ const FrontendSteps = (props) => {
     </div>
     );
   }
-  const handleSubmit = () => {
+
+  /* creates a new card on submit */
+    const handleSubmit = () => {
     const title = document.querySelector('#title').value;
     const description = document.querySelector('#description').value;
     const resources = document.querySelector('#resources').value;

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
+
 const LoginPage = () => {
+  /* handleSignup grabs the values in the input fields and stores them to eventually be used as a POST request*/
   const handleSignup = (event) => {
     const name = document.querySelector('#name').value;
     const password = document.querySelector('#password').value;
-    console.log('log in button clicked');
     event.preventDefault();
     fetch('/api/signup', {
       method: 'POST',
@@ -23,12 +24,10 @@ const LoginPage = () => {
         }
         );
   }
-
+  /* handleLogin grabs the values in the input fields and stores them to eventually be used as a POST request*/
   const handleLogin = (event) => {
     const name = document.querySelector('#name').value;
     const password = document.querySelector('#password').value;
-
-    console.log('sign up button clicked');
     event.preventDefault();
     fetch('/api/login', {
       method: 'POST',
@@ -38,7 +37,6 @@ const LoginPage = () => {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log('result: ', result);
           if (result !== undefined) {
             window.location.replace('http://localhost:8080/dashboard');
           }
