@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../styles/Navbar.css';
 
+/* Title within navbar */
 const Backend = () => {
   return (
     <div>

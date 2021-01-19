@@ -7,7 +7,7 @@ signUpController.signUp = (req, res, next) => {
   // create a table with the cookie
   const values = [req.body.name, req.body.password];
   const createQuery = `
-    CREATE TABLE ${req.body.name} 
+    CREATE TABLE ${req.body.name}
     (
       "id" serial NOT NULL,
       "name" varchar,
@@ -33,7 +33,6 @@ signUpController.login = (req, res, next) => {
   const sqlQuery = `SELECT * FROM Login WHERE username = '${req.body.name}' AND password = '${req.body.password}'`;
   db.query(sqlQuery)
     .then((data) => {
-      console.log('login data ', data);
       res.locals.user = data.rows[0].username;
       next();
     })
@@ -43,5 +42,4 @@ signUpController.login = (req, res, next) => {
     });
 };
 
-//WHERE username = ${req.body.name} AND password = ${req.body.password}
 module.exports = signUpController;

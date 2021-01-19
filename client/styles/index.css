@@ -2,6 +2,7 @@
   font-family: monospace;
   outline: 0;
 }
+/* Frontend Styling */
 
 .grid-container {
   margin-top: 300px;
@@ -71,6 +72,26 @@ body {
   text-align: center;
 }
 
+.container {
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
+  width: 85%;
+}
+
+.container h1 {
+  font-size: 3rem;
+}
+
+.navbarTitle {
+  cursor: pointer;
+}
+
+
 .inputForm input {
   display: inline-block;
   border: none;
@@ -100,6 +121,22 @@ body {
   cursor: pointer;
 }
 
+/* Backend Components Styles */
+
+#pointer {
+  height: 30px;
+  width: 30px;
+  animation: 0.8s linear 1s infinite alternate slidein;
+}
+@keyframes slidein {
+  from {
+    margin-left: 90%;
+  }
+  to {
+    margin-left: 92%;
+  }
+}
+
 /* Login Styling */
 
 .navbar {
@@ -109,14 +146,6 @@ body {
   font-size: 20px;
   text-decoration: none;
   margin-top: 2rem;
-}
-
-a {
-  display: flex;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
-  color: blue;
 }
 
 .signup {
@@ -166,4 +195,12 @@ a {
 .loginContainer button:hover {
   cursor: pointer;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Typewriter CSS */
+#divTitle {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 3%;
+  margin-bottom: 3%;
 }

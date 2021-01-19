@@ -1,11 +1,16 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import '../styles/Backend.css';
+
 
 const BackendSteps = (props) => {
+  /* variable and state declaration */
   const createdDivs = [];
   const [backendData, setBackendData] = useState([]);
   const [userData, setUserData] = useState([]);
 
+  /*
+    * similar to component life cycle method.
+    * onload, the page will make a fetch request, and set it as state under backendData
+  */
   useEffect(() => {
     fetch(`/api/backend/${props.cookieState}`)
       .then((res) => res.json())
@@ -20,6 +25,8 @@ const BackendSteps = (props) => {
         }
       );
   }, []);
+
+  /* iterating thorough backendData to create the divs  */
 
   for (let i = 0; i < backendData.length; i += 1) {
     createdDivs.push(
@@ -47,6 +54,7 @@ const BackendSteps = (props) => {
     );
   }
 
+  /* creating user data  */
   for (let i = 0; i < userData.length; i += 1) {
     createdDivs.push(
       <div className="cards" key={`key${i}`} id={userData[i].id}>
@@ -75,6 +83,7 @@ const BackendSteps = (props) => {
 
 
 
+  /* creates a new card on submit */
 
   const handleSubmit = () => {
     const title = document.querySelector('#title').value;

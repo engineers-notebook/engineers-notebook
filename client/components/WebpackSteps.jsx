@@ -1,17 +1,21 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import '../styles/Webpack.css';
+import '../styles/index.css';
 
 const WebpackSteps = (props) => {
+  /* variable and state declaration */
   const createdDivs = [];
   const [webpackData, setWebpackData] = useState([]);
   const [userData, setUserData] = useState([]);
 
+  /*
+    * similar to component life cycle method.
+    * onload, the page will make a fetch request, and set it as state under backendData
+  */
   useEffect(() => {
     fetch(`/api/webpack/${props.cookieState}`)
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log('result: ', result);
           setWebpackData(result[0]);
           setUserData(result[1]);
         },
@@ -21,8 +25,8 @@ const WebpackSteps = (props) => {
       );
   }, []);
 
+  /* iterating thorough backendData to create the divs  */
   for (let i = 0; i < webpackData.length; i += 1) {
-      console.log('entered first for loop');
       createdDivs.push(
         <div className="cards" key={`key${i}`} id={webpackData[i].id}>
         <div className="innerContainer">
@@ -48,9 +52,8 @@ const WebpackSteps = (props) => {
       );
   }
 
-  // sorry......
+    /* creates user data */
     for (let i = 0; i < userData.length; i += 1) {
-      console.log('entered first for loop');
       createdDivs.push(
         <div className="cards" key={`key${i}`} id={userData[i].id}>
         <div className="innerContainer">
@@ -75,7 +78,7 @@ const WebpackSteps = (props) => {
       </div>
       );
   }
-
+  /* creates a new card on submit */
   const handleSubmit = () => {
     const title = document.querySelector('#title').value;
     const description = document.querySelector('#description').value;

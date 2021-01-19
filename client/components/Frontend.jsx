@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+/* Title within navbar */
 const Frontend = () => {
   return (
     <div className="frontend">
