@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/Frontend.css';
 
 const Frontend = () => {
   return (

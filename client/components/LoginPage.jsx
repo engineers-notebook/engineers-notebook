@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const LoginPage = () => {
-  function handleSignup(event) {
+  const handleSignup = (event) => {
     const name = document.querySelector('#name').value;
     const password = document.querySelector('#password').value;
     console.log('log in button clicked');
@@ -11,15 +11,17 @@ const LoginPage = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password }),
     })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log('result: ', result);
+    .then((res) => {
+      res.json()
+      window.location.reload()
+    })
+    .then(
+      (result) => {
         },
         (error) => {
           console.log(error);
         }
-      );
+        );
   }
 
   const handleLogin = (event) => {
@@ -37,6 +39,9 @@ const LoginPage = () => {
       .then(
         (result) => {
           console.log('result: ', result);
+          if (result !== undefined) {
+            window.location.replace('http://localhost:8080/dashboard');
+          }
         },
         (error) => {
           console.log(error);
