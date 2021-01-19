@@ -8,7 +8,6 @@ const webpack = require('./routes/webpackRoutes.js');
 const frontend = require('./routes/frontendRoutes.js');
 const backend = require('./routes/backendRoutes.js');
 const appconfig = require('./routes/appConfigRoutes.js');
-const personal = require('./routes/personalRoutes.js');
 const signup = require('./routes/signUpRoutes.js');
 const dashboard = require('./routes/dashboardRoutes.js');
 
@@ -27,7 +26,6 @@ app.use('/api', webpack);
 app.use('/api', frontend);
 app.use('/api', backend);
 app.use('/api', appconfig);
-app.use('/api', personal);
 app.use('/api', signup);
 app.use('/api', dashboard);
 
