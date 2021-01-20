@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "Planda",
+      "connectString": "postgres://tpnssfpy:7_v0tS4oudrDEEZNbq9LFcpmLSvoBi4z@raja.db.elephantsql.com:5432/tpnssfpy"
+    }
+  ]
+}
