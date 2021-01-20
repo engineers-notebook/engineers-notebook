@@ -50,8 +50,8 @@ const LoginPage = () => {
   return (
     <div className="outerContainer">
       <div className="loginContainer">
-        <input id="name" placeholder="username"></input>
-        <input id="password" placeholder="password"></input>
+        <input  id="name" placeholder="username"></input>
+        <input type='password' id="password" placeholder="password"></input>
         <button onClick={handleSignup}>Sign up</button>
         <button onClick={handleLogin}>Log in</button>
       </div>

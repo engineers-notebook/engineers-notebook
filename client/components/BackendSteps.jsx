@@ -53,7 +53,6 @@ const BackendSteps = (props) => {
       </div>
     );
   }
-
   /* creating user data  */
   for (let i = 0; i < userData.length; i += 1) {
     createdDivs.push(
@@ -80,8 +79,6 @@ const BackendSteps = (props) => {
       </div>
     );
   }
-
-
 
   /* creates a new card on submit */
 
