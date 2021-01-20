@@ -11,6 +11,9 @@ const appconfig = require('./routes/appConfigRoutes.js');
 const signup = require('./routes/signUpRoutes.js');
 const dashboard = require('./routes/dashboardRoutes.js');
 
+// execute auth file with this instance of app
+require('./server-auth')(app)
+
 // body parsing/url parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,7 +22,6 @@ app.use(cookieParser());
 // serve build folder/statically serving client folder
 app.use('/build', express.static(path.resolve(__dirname, '../build')));
 app.use(express.static(path.resolve(__dirname, '../client')));
-
 
 // routes
 app.use('/api', webpack);
@@ -42,12 +44,13 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: 'Express error handler caught known middleware error',
+    log: 'Express error handler caught unknown middleware error',
     status: 500,
     message: { err: 'An error occured' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
+  console.log(err);
+  // console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
 
