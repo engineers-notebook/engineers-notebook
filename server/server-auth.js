@@ -10,11 +10,9 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const { googleClientId, googleClientSecret, cookieEncryptionKey } = require('./settings');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const db = require('./models/taskModel');
 
 module.exports = (app) => {
-  // TODO: swap for real db
-  const mockDb = [];
-
   // http://www.passportjs.org/docs/google/
   // https://dev.to/phyllis_yym/beginner-s-guide-to-google-oauth-with-passport-js-2gh4
   passport.use(
@@ -25,17 +23,24 @@ module.exports = (app) => {
         callbackURL: `/auth/google/callback`,
       },
       (accessToken, refreshToken, profile, done) => {
-        try {
-          // TODO: swap for real db
-          if (mockDb.find((storedUser) => profile.id === storedUser.id)) done(null, profile);
-          else {
-            // TODO: swap for real db
-            mockDb.push(profile);
-            done(null, profile);
-          }
-        } catch (e) {
-          console.error('error in google strategy callback', e);
-        }
+        const gUser = { id: profile.id, username: profile.displayName };
+        // get user from users table using profile.id
+
+        const findUserQuery = `SELECT * FROM users WHERE user_id = $1`;
+        const findUserParams = [gUser.id];
+
+        db.query(findUserQuery, findUserParams).then(({rows}) => {
+          if (rows.length) return done(null, gUser);
+
+          // if user not in db
+          // create user in users table with profile.id
+          const createUserQuery = `INSERT INTO users (user_id, username) VALUES ($1, $2);`;
+          const userValues = [gUser.id, gUser.username];
+
+          db.query(createUserQuery, userValues).then(() => {
+            done(null, gUser);
+          });
+        });
       }
     )
   );
@@ -53,16 +58,18 @@ module.exports = (app) => {
 
   passport.serializeUser((user, done) => {
     // user is the user passed from done method inside GoogleStrategy
+    console.log('serialize user', user)
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
     // callss done with user object that can be retrieved with id provided to serializeUser
-    // TODO: swap for real db
-    done(
-      null,
-      mockDb.find((storedUser) => storedUser.id === id)
-    );
+    const findUserQuery = `SELECT * FROM users WHERE user_id = $1`;
+    const findUserParams = [id];
+
+    db.query(findUserQuery, findUserParams).then(({rows}) => {
+      done(null, rows[0]);
+    });
   });
 
   // route to listen to google's oauth callback
