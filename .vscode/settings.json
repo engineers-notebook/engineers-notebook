@@ -8,6 +8,16 @@
       "driver": "PostgreSQL",
       "name": "Planda",
       "connectString": "postgres://tpnssfpy:7_v0tS4oudrDEEZNbq9LFcpmLSvoBi4z@raja.db.elephantsql.com:5432/tpnssfpy"
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Local",
+      "username": "plandadev",
+      "database": "planda",
+      "password": ""
     }
   ]
 }
