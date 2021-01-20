@@ -4,13 +4,13 @@ const frontendController = require('../controller/frontendController.js');
 const router = express.Router();
 
 router.get(
-  '/frontend/:username',
+  '/Frontend/:username',
   frontendController.getFrontEnd,
   frontendController.getUser,
   (req, res) => res.status(200).json([res.locals.frontEnd, res.locals.user])
 );
 
-router.post('/frontend', frontendController.postFrontend, (req, res, next) => {
+router.post('/Frontend', frontendController.postFrontend, (req, res, next) => {
   res.status(200).send('Posted Successful on Frontend');
 });
 module.exports = router;

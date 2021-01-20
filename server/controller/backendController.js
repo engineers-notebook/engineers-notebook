@@ -20,6 +20,7 @@ backendController.getUser = (req, res, next) => {
 };
 
 backendController.postBackend = (req, res, next) => {
+  console.log('Here!')
   const { title, description, resources, iscompleted, type, name } = req.body;
   const vals = [title, description, resources, iscompleted, type, name];
   const sqlQuery = `INSERT INTO ${name} (title, description, resources, iscompleted, type, name) VALUES ($1, $2, $3, $4, $5, $6)`;
