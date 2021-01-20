@@ -4,16 +4,104 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const PORT = 3000;
 
-const webpack = require('./routes/webpackRoutes.js');
-const frontend = require('./routes/frontendRoutes.js');
-const backend = require('./routes/backendRoutes.js');
-const appconfig = require('./routes/appConfigRoutes.js');
-const signup = require('./routes/signUpRoutes.js');
-const dashboard = require('./routes/dashboardRoutes.js');
+// const frontend = require('./routes/frontendRoutes.js');
+const groupController = require('./controller/groupController.js');
+const cardController = require('./controller/cardController.js');
+// const notebookController = require('./controller/notebookController.js');
+const userController = require('./controller/userController.js');
 
+//////////////////////////////////////////////////////////////
 // execute auth file with this instance of app
-require('./server-auth')(app)
+// require('./server-auth')(app);
 
+
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const { googleClientId, googleClientSecret, cookieEncryptionKey } = require('./settings');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const db = require('./models/taskModel');
+
+  // http://www.passportjs.org/docs/google/
+  // https://dev.to/phyllis_yym/beginner-s-guide-to-google-oauth-with-passport-js-2gh4
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: googleClientId,
+        clientSecret: googleClientSecret,
+        callbackURL: `/auth/google/callback`,
+      },
+      // TODO: refactor with transactions
+      (accessToken, refreshToken, profile, done) => {
+        const gUser = { id: profile.id, username: profile.displayName };
+        // get user from users table using profile.id
+
+        const findUserQuery = `SELECT * FROM users WHERE user_id = $1`;
+        const findUserParams = [gUser.id];
+
+        db.query(findUserQuery, findUserParams).then(({ rows }) => {
+          if (rows.length) return done(null, gUser);
+
+          // if user not in db
+          // create user in users table with profile.id
+          const createUserQuery = `INSERT INTO users (user_id, username) VALUES ($1, $2);`;
+          const userValues = [gUser.id, gUser.username];
+
+          db.query(createUserQuery, userValues).then(() => {
+            const addToWelcome = `INSERT INTO user_groups (group_id, user_id) VALUES (1, $1)`;
+            const addToWelcomeParams = [gUser.id];
+            db.query(addToWelcome, addToWelcomeParams).then(() => {
+              done(null, gUser);
+            });
+          });
+        });
+      }
+    )
+  );
+
+  app.use(
+    cookieSession({
+      // day in ms
+      maxAge: 24 * 60 * 60 * 1000,
+      keys: [cookieEncryptionKey],
+    })
+  );
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  passport.serializeUser((user, done) => {
+    // user is the user passed from done method inside GoogleStrategy
+    console.log('serialize user', user);
+    return done(null, user.id);
+  });
+
+  passport.deserializeUser((id, done) => {
+    // callss done with user object that can be retrieved with id provided to serializeUser
+    const findUserQuery = `SELECT * FROM users WHERE user_id = $1`;
+    const findUserParams = [id];
+
+    db.query(findUserQuery, findUserParams).then(({ rows }) => {
+      const {user_id: id, username} = rows[0]
+      done(null, {id,username});
+    });
+  });
+
+  // route to listen to google's oauth callback
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/dashboard', successRedirect: '/dashboard' })
+  );
+
+  // route to iniate oauth flow.
+  app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+  // route to logout
+  app.get('/auth/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
+///////////////////////////////////////////////////////////////////////////
 // body parsing/url parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,12 +112,36 @@ app.use('/build', express.static(path.resolve(__dirname, '../build')));
 app.use(express.static(path.resolve(__dirname, '../client')));
 
 // routes
-app.use('/api', webpack);
-app.use('/api', frontend);
-app.use('/api', backend);
-app.use('/api', appconfig);
-app.use('/api', signup);
-app.use('/api', dashboard);
+app.get(
+  '/api/user/groups',
+  (req, res, next) => {
+    console.log('session-server', req.session)
+    console.log('user-server', req.user)
+    next()
+  },
+  userController.getGroups,
+  (req, res) => {
+    res.json({
+      username: req.user.username,
+      userGroups: res.locals.userGroups,
+    });
+  }
+);
+
+// routes
+// app.get('/api/user/groups', notebookController.getNotebooks, (req, res) => {
+//   res.json(res.locals.notebooks);
+// });
+
+app.get('/api/cards/group/:groupId', groupController.getCards, (req, res) => {
+  res.json(res.locals.cards);
+});
+
+// --------- post new cards -------------
+
+app.post('/api/card', cardController.postCard, (req, res) => {
+  res.json(res.locals.newCard);
+});
 
 // --------- wrapped in if statement -------------
 // app.use('/', (req, res) => {

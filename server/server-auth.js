@@ -22,6 +22,7 @@ module.exports = (app) => {
         clientSecret: googleClientSecret,
         callbackURL: `/auth/google/callback`,
       },
+      // TODO: refactor with transactions
       (accessToken, refreshToken, profile, done) => {
         const gUser = { id: profile.id, username: profile.displayName };
         // get user from users table using profile.id
@@ -29,7 +30,7 @@ module.exports = (app) => {
         const findUserQuery = `SELECT * FROM users WHERE user_id = $1`;
         const findUserParams = [gUser.id];
 
-        db.query(findUserQuery, findUserParams).then(({rows}) => {
+        db.query(findUserQuery, findUserParams).then(({ rows }) => {
           if (rows.length) return done(null, gUser);
 
           // if user not in db
@@ -38,7 +39,11 @@ module.exports = (app) => {
           const userValues = [gUser.id, gUser.username];
 
           db.query(createUserQuery, userValues).then(() => {
-            done(null, gUser);
+            const addToWelcome = `INSERT INTO user_groups (group_id, user_id) VALUES (1, $1)`;
+            const addToWelcomeParams = [gUser.id];
+            db.query(addToWelcome, addToWelcomeParams).then(() => {
+              done(null, gUser);
+            });
           });
         });
       }
@@ -58,7 +63,7 @@ module.exports = (app) => {
 
   passport.serializeUser((user, done) => {
     // user is the user passed from done method inside GoogleStrategy
-    console.log('serialize user', user)
+    console.log('serialize user', user);
     done(null, user.id);
   });
 
@@ -67,7 +72,7 @@ module.exports = (app) => {
     const findUserQuery = `SELECT * FROM users WHERE user_id = $1`;
     const findUserParams = [id];
 
-    db.query(findUserQuery, findUserParams).then(({rows}) => {
+    db.query(findUserQuery, findUserParams).then(({ rows }) => {
       done(null, rows[0]);
     });
   });
