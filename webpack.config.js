@@ -52,7 +52,12 @@ module.exports = {
       '/api': {
         target: 'http://localhost:3000/',
         secure: false,
-        changeOrigin: true,
+        changeorigin: true,
+      },
+      '/auth': {
+        target: 'http://localhost:3000/',
+        secure: false,
+        changeorigin: true,
       },
     },
     publicPath: '/',

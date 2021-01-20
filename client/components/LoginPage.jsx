@@ -47,13 +47,22 @@ const LoginPage = () => {
       );
   };
 
+  const oAuthHandler = (evt) => {
+    window.location.href = '/auth/google'
+  }
+
+  const logoutHandler = () => {
+    window.location.href = '/auth/logout'
+  }
+
   return (
     <div className="outerContainer">
       <div className="loginContainer">
         <input  id="name" placeholder="username"></input>
         <input type='password' id="password" placeholder="password"></input>
         <button onClick={handleSignup}>Sign up</button>
-        <button onClick={handleLogin}>Log in</button>
+        <button onClick={oAuthHandler}>Log in</button>
+        <button onClick={logoutHandler}>Log out</button>
       </div>
     </div>
   );
