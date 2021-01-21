@@ -7,7 +7,7 @@ const PORT = 3000;
 // const frontend = require('./routes/frontendRoutes.js');
 const groupController = require('./controller/groupController.js');
 const cardController = require('./controller/cardController.js');
-// const notebookController = require('./controller/notebookController.js');
+const notebookController = require('./controller/notebookController.js');
 const userController = require('./controller/userController.js');
 
 //////////////////////////////////////////////////////////////
@@ -142,6 +142,36 @@ app.get('/api/cards/group/:groupId', groupController.getCards, (req, res) => {
 app.post('/api/card', cardController.postCard, (req, res) => {
   res.json(res.locals.newCard);
 });
+
+
+app.patch('/api/updateCard', cardController.updateCard, (req, res) => {
+  res.json(res.locals.updateCard);
+});
+
+
+app.delete('/api/deleteCard', cardController.deleteCard, (req, res) => {
+  res.json(res.locals.deletedCard);
+})
+
+
+
+// --------- post new notebooks -------------
+
+// app.post('/api/notebook', notebookController.postNotebook, (req, res) => {
+//   res.json(res.locals.newNotebook);
+// });
+
+
+// app.patch('/api/updateNotebook', notebookController.updateNotebook, (req, res) => {
+//   res.json(res.locals.updateNotebook);
+// });
+
+
+// app.delete('/api/deleteNotebook', notebookController.deleteNotebook, (req, res) => {
+//   res.json(res.locals.deletedNotebook);
+// })
+
+
 
 // --------- wrapped in if statement -------------
 // app.use('/', (req, res) => {
